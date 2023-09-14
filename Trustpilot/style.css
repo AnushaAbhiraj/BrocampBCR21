@@ -1,0 +1,94 @@
+body
+{
+  margin: 0;
+  padding: 0;
+  line-height: .3rem;
+}
+
+#image1
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 8rem;
+  height: 3rem;
+}
+#inputfield
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 140px;
+  height: 35px;
+  float: left;
+}
+#inputtext
+{
+    border: 1px solid #1c1c1c;
+    border-radius: 32px;
+    height: 100%;
+    display: inline-block;
+    outline: none;
+    overflow: hidden;
+    padding-right: 85px;
+    padding-left: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#image2
+{
+  width: 300rem;
+  height: 20rem;
+  background-color: transparent;
+}
+.para p{
+  font-size: 2.5rem;
+  font-weight: 900;
+  padding:  0 2.5rem;
+  color: black;
+  
+}
+#inputtext
+{
+  margin: 1rem;
+
+}
+
+#imagelogo
+{
+  display: block;
+  padding: 1rem;
+  width: 10rem;
+  height: 5rem;
+}
+@media only screen and (max-width: 1000px) {
+  .col-md-3
+  {
+    padding-top: 2rem;
+    font-size: 1rem;
+    padding: .2rem;
+  }
+  .card-title
+  {
+    padding: 1rem;
+    font-size: .1rem;
+    padding: 1rem;
+    width: 7rem;
+    height: 5rem
+
+  }
+  .col-12
+  {
+    padding-top: 2rem;
+    font-size: 1rem;
+    padding: .2rem;
+  }
+  .col-sm-4
+  {
+    padding-top: 2rem;
+    font-size: 1rem;
+    padding: .2rem;
+  }
+}
