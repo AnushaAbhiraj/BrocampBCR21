@@ -1,0 +1,56 @@
+<%- include("../layouts/header.ejs") %>
+
+<section class="h-100 gradient-form" style="background-color: #d7c8c8;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-6">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-12">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                      style="width: 100px;" alt="logo">
+                    <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                  </div>
+
+                <%
+                    if(typeof message !== "undefined"){
+                %>
+                    <p style="color: rgba(244, 4, 4, 0.932);"><%= message%></p>
+
+                <% } %>
+  
+                  <form action="/admin/adminlogin" method="post">
+                    <p>Please login to Admin account</p>
+  
+                    <div class="form-outline mb-4">
+                      <input type="email" name="username" id="form2Example11" class="form-control"
+                        placeholder="Email address" required/>
+                      <label class="form-label" for="form2Example11">Username</label>
+                    </div>
+  
+                    <div class="form-outline mb-4">
+                      <input type="password" name="password" placeholder="password" 
+                      id="form2Example22" class="form-control" required />
+                      <label class="form-label" for="form2Example22">Password</label>
+                    </div>
+  
+                    <div class="text-center pt-1 mb-5 pb-1">
+                        <input type="submit" value="Log In"><br><br>
+                        <a href="/register">Create Admin account here</a>
+                      
+                    </div>
+  
+                  </form>
+  
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<%- include("../layouts/footer.ejs") %>

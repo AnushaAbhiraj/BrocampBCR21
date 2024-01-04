@@ -1,6 +1,9 @@
 const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
+const config = require("../config/config");
+const user_route = require("../routes/userRoutes.js");
+
 
 const securePassword = async( password )=>{
 
@@ -19,7 +22,7 @@ const loadRegister = async(req,res)=>{
 
     try {
         
-        res.render("registration");
+        res.render("register");
 
     } catch (error) {
         console.log(error.message)
@@ -35,18 +38,17 @@ const insertUser = async(req,res)=>{
             const user = new User({
                 name : req.body.name,
                 email : req.body.email,
-                mobile : req.body.mobile,
+                mobile : String(req.body.mobile),
                 password : newPassword,
                 image : req.file.filename,
-                is_admin : 0,
-                name : req.body.name
+                is_admin : false,
             });
 
             const userData = await user.save();
             if(userData){
-                res.render("registration",{message : " Your profile registered successfully. Please verify your email id. "});
+                res.render("login",{message : " Your profile registered successfully. Please login now"});
             }else {
-                res.render("registration", {message : " Your profile registration failed "});
+                res.render("register", {message : " Your profile registration failed "});
             }
 
     } catch (error) {
@@ -57,51 +59,36 @@ const insertUser = async(req,res)=>{
 
 // login user methods
 
-const loginPageLoad = async( req, res)=>{
-
-    try {
-        
-        res.render("login");
-        console.log("logged IN")
-
-    } catch (error) {
-
-        console.log(error.message);
-
-        
-    }
+const loginPageLoad = ( req, res)=>{
+    res.render("login");
 }
+
+    
 
 const loginVerify = async( req, res)=>{
 
     try {
         
-        const userEmail = req.body.email;
-        const userPassword = req.body.password;
-
-        const userData = await User.findOne({ email: userEmail});
-        console.log("verifying")
-
+        const email = req.body.email;
+        const password = req.body.password;
+       
+        const userData = await User.findOne({ email: email, is_admin:false});
+        console.log(userData);
+        
         if(userData){
-
-            const passwordMatch = await bcrypt.compare( userPassword, userData.password);
-
+            const passwordMatch = await bcrypt.compare(password, userData.password);
             if(passwordMatch){
-
-                res.redirect("home");
-                console.log("password matched");
-
+                req.session.user = userData
+                console.log(req.session);
+                res.render("home", {userData});
             }else{
-
-                res.render("login", {message : "Entered email or password is incorrect"});
+                res.render("login", { message : "Email or Password is incorrect"});
             }
 
         }else{
-            res.render("login", {message : "Entered email or password is incorrect"});
+            res.render("login", { message : "Email or Password is incorrect"});
         }
-
-
-
+        
     } catch (error) {
         console.log(error.message);
     }
@@ -110,12 +97,21 @@ const loginVerify = async( req, res)=>{
 
 //home page loading
 
-const homePage = async(req, res)=>{
+const homePage =(req, res)=>{
+    
+    res.render("home" , { message : "Welcome to your home page "});
+       
+}
+
+
+
+const logout = async(req, res)=>{
 
     try {
 
-        res.render("home" , { message : "Welcome to your home page."});
-        console.log("home page loading");
+        req.session.destroy();
+        res.redirect("/");
+      
     } catch (error) {
         console.log(error.message);
         
@@ -128,6 +124,7 @@ module.exports = {
     insertUser,
     loginPageLoad,
     loginVerify,
-    homePage
+    homePage,
+    logout
 
 }

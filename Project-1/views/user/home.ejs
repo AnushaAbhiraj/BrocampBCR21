@@ -16,6 +16,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
+            <a class="nav-link active" aria-current="accountpage" href="#">My Account</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
@@ -36,7 +39,10 @@
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
+          
         </form>
+        <button class="btn btn-outline-success" type="submit" ><a href="/logout">LOG OUT</a></button>
+        
       </div>
     </div>
   </nav>
@@ -45,19 +51,22 @@
         <div class="row pt-4">
           <div class="col-md-12">
             <div class="card " style="width: 22rem;">
-                <img src="https://ghc.health/cdn/shop/files/glowserum_2_025f4ca3-576a-44b6-964c-8e6b03267357_900x.jpg?v=1687141317" class="card-img-top" alt="...">
-                  <h5 class="card-title">WELCOME</h5>
-                  <p class="card-text">
-                    THIS IS OUR HOME PAGE
-                  </p>
-                  <a href="#" class="btn btn-primary">NICE TO MEET YOU</a>
-                </div>
+                
+                  <h5 class="card-title">WELCOME,  <%= userData.name %></h5>
+                  <%
+                      if(typeof message !== "undefined"){
+                  %>
+                      <p style="color: rgba(244, 4, 4, 0.932);"><%= message%></p>
+      
+                  <% } %>
+                  
+
+               </div>
               </div>
           </div>
-          
-          
-      </div>
+         </div>
   </section>
+
 
 
 <%- include("../layouts/footer.ejs")%>

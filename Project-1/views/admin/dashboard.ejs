@@ -1,0 +1,46 @@
+<%- include("../layouts/header.ejs")%>
+
+<h2>Welcome Admin</h2>
+<br>
+<a href="/admin/newuser">Add new user</a>
+<br><br>
+<table width="50%">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Image</th>
+        <th>Action</th>
+    </tr>
+
+    <%
+    if(user.length >0){
+        for(let i=0;i<user.length;i++){
+        
+            %>
+            <tr>
+                <td><%= user[i].name %></td>
+                <td><%=user[i].email %></td>
+                <td><%=user[i].mobile %></td>
+                <td><img src="/userImages/<%=user[i].image%>" alt="<%=user[i].image%>" width="50px" height="50px"></td>
+                <td>
+                    <a href="/admin/edituser?id=<%=user[i]._id %>">Edit</a>
+                    <a href="/admin/deleteuser?id=<%=user[i]._id %>">Delete</a>
+                </td>
+            </tr>
+            <%
+        }    
+    }else{
+        %>
+        <tr>
+            <td colspan="5"> User not found</td>
+        </tr>
+        <%
+    }
+    %>
+</table>
+
+<a href="/admin/logout">Log out</a>
+
+
+<%- include("../layouts/footer.ejs")%>
